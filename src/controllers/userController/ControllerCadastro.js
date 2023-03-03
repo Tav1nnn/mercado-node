@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as Yup from 'yup';
 
-class UserController {
+class ControllerCadastro {
   // eslint-disable-next-line class-methods-use-this
   async cadastro(req, res) {
     const schema = Yup.object().shape({
@@ -48,4 +48,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default new ControllerCadastro();
