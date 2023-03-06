@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 
 class ControllerLogin {
   // eslint-disable-next-line class-methods-use-this
-
   async login(req, res) {
     console.log(req.body);
     const schema = Yup.object().shape({
