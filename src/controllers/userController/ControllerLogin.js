@@ -1,10 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as Yup from 'yup';
+import jwt from 'jsonwebtoken';
 
 class ControllerLogin {
   // eslint-disable-next-line class-methods-use-this
+
   async login(req, res) {
+    console.log(req.body);
     const schema = Yup.object().shape({
       email: Yup.string().email().required(),
       senha: Yup.string().required(),
@@ -26,7 +29,7 @@ class ControllerLogin {
     });
 
     if (user === null) {
-      return res.status(400).json({ Erro: 'Usuário não existe' });
+      return res.status(400).json({ Erro: 'Email ou senha incorretos' });
     }
 
     return res.status(200).json(user);
