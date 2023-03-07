@@ -21,3 +21,11 @@ model User {
 
   @@map("users")
 }
+
+model Produto {
+  id         Int    @id @default(autoincrement())
+  name       String
+  descricao  String
+  quantidade Int
+  preco      Int
+}

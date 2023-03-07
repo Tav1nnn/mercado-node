@@ -1,8 +1,22 @@
-export default (req, res, next) => {
+import jwt from 'jsonwebtoken';
+import { promisify } from 'util';
+
+export default async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (authHeader && authHeader === 'secret') {
-    return next();
+
+  if (!authHeader) {
+    return res.status(401).json({ Erro: 'Não possui o token' });
   }
 
-  return res.status(401).json({ erro: 'Usuário não autorizado para acessar essa API' });
+  const [, token] = authHeader.split(' ');
+
+  try {
+    const decoded = await promisify(jwt.verify)(token, 'secret');
+
+    req.user = decoded;
+
+    return next();
+  } catch (error) {
+    return res.status(401).json({ Erro: 'token inválido' });
+  }
 };

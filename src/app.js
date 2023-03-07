@@ -1,6 +1,6 @@
 import expresss from 'express';
 import routes from './routes/routes';
-import midleware from './middleware/midleware';
+// import midleware from './middleware/midleware';
 
 class App {
   constructor() {
@@ -11,7 +11,7 @@ class App {
 
   middlewares() {
     this.server.use(expresss.json());
-    this.server.use(midleware);
+    // this.server.use(midleware);
   }
 
   routes() {

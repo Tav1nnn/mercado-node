@@ -31,7 +31,21 @@ class ControllerLogin {
       return res.status(400).json({ Erro: 'Email ou senha incorretos' });
     }
 
-    return res.status(200).json(user);
+    const { id, name, isAdm } = user;
+
+    return res.status(200).json({
+      user: {
+        id,
+        name,
+        email,
+        isAdm,
+      },
+      token: jwt.sign({
+        id, name, email, isAdm,
+      }, 'secret', {
+        expiresIn: '7d',
+      }),
+    });
   }
 }
 
