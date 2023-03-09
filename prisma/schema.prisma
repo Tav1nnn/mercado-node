@@ -24,8 +24,11 @@ model User {
 
 model Produto {
   id         Int    @id @default(autoincrement())
+  codigo     Int    @unique
   name       String
   descricao  String
   quantidade Int
   preco      Int
+
+  @@map("produtos")
 }
