@@ -23,12 +23,14 @@ model User {
 }
 
 model Produto {
-  id         Int    @id @default(autoincrement())
-  codigo     Int    @unique
+  id         Int      @id @default(autoincrement())
+  codigo     Int      @unique
   name       String
   descricao  String
   quantidade Int
   preco      Int
+  created_At DateTime @default(now())
+  update_At  DateTime @updatedAt
 
   @@map("produtos")
 }
