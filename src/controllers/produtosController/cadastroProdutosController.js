@@ -4,17 +4,17 @@ import * as Yup from 'yup';
 class CadastroProduto {
   async cadastroProduto(req, res) {
     const { user } = req;
-    console.log(user);
+
     if (user.isAdm === false) {
       return res.status(401).json({ Erro: 'Este usuario não tem permição' });
     }
 
     const schema = Yup.object().shape({
       codigo: Yup.number().required(),
-      nome: Yup.string().required(),
+      name: Yup.string().required(),
       descricao: Yup.string().required(),
       quantidade: Yup.number().required(),
-      preco: Yup.number.required(),
+      preco: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -22,8 +22,10 @@ class CadastroProduto {
     }
 
     const {
-      codigo, nome, descricao, quantidade, preco,
+      codigo, name, descricao, quantidade, preco,
     } = req.body;
+
+    console.log(codigo);
 
     const prisma = new PrismaClient();
 
@@ -36,7 +38,7 @@ class CadastroProduto {
     if (result === null) {
       const produto = await prisma.produto.create({
         data: {
-          codigo, nome, descricao, quantidade, preco,
+          codigo, name, descricao, quantidade, preco,
         },
       });
 
